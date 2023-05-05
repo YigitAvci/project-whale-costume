@@ -2,14 +2,11 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import {
-	Container,
 	Input,
 	Row,
 	Col,
 	Label,
 	Button,
-	ListGroup,
-	ListGroupItem,
 } from "reactstrap";
 import { updateAuthToken } from "../redux/actions/AuthActions";
 import { updateSessionState } from "../redux/actions/SessionActions"
