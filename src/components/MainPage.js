@@ -60,6 +60,10 @@ export default function MainPage() {
 				setReviews(data.data);
 			});
 	}
+	
+	function demoFunction(argument) {
+		console.log("here is demo function!!!!!!! ", argument)
+	}
 
 	/*async function getCommentsByReview(review) {
 		console.log("review is: ", review)
@@ -109,7 +113,7 @@ export default function MainPage() {
 					<Card>
 						<CardHeader style={{ fontWeight: "bold" }}>{movie.name}</CardHeader>
 						{reviews.map((review) => (
-							<Review review={review}></Review>
+							<Review review={review} refreshMovieDetails={getMovieDetails}></Review>
 						))}
 						{console.log("first review: ", reviews[0])}
 					</Card>

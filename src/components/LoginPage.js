@@ -36,10 +36,12 @@ function LoginPage() {
 		})
 			.then((response) => response.json())
 			.then((data) => {
+				console.log("response data: ", data)
 				const token = data.data.token;
 				dispatch(updateAuthToken("Bearer " + token));
                 dispatch(updateSessionState(true))
-				dispatch(updateUser(data.data.username))
+				dispatch(updateUser(data.data))
+				console.log("user: ", data.data)
 				console.log("username: ", data.data.username)
 				navigate("/");
 			});

@@ -1,7 +1,10 @@
 var initialState = {
     authToken: "",
     isLoggedIn: false,
-    currentUser: ""
+    currentUser: {
+        id: 0,
+        username: ""
+    }
 }
 
 export default initialState

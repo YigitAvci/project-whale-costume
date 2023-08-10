@@ -1,14 +1,15 @@
-import { Button, Card, CardBody, CardFooter } from "reactstrap";
+import { Card, CardBody, CardFooter } from "reactstrap";
 import Comment from "./Comment";
 import { useSelector } from "react-redux";
+import EditReview from "./EditReview";
+import Answer from "./Answer";
 
-export default function Review(review) {
+export default function Review(args) {
 
     const currentUser = useSelector((state) => state.currentUserReducer);
 
     function isCurrentUserAuthor(author) {
-        console.log("author: ", author, " - current user: ", currentUser)
-        if(author === currentUser) {
+        if(author === currentUser.user.username) {
             console.log("current user is the author")
             return "visible"
         }
@@ -17,20 +18,23 @@ export default function Review(review) {
     }
     
     return(
-        <div>
+        <div style={{marginTop: "5px"}}>
+            {
+                console.log("REVIEW ID: ", args.review.id)
+            }
             <Card>
                 <CardBody>
-                    {review.review.review}
+                    {args.review.review}
                 </CardBody>
-                <CardFooter style={{textAlign: "end"}}>
-                    <Button style={{visibility: isCurrentUserAuthor(review.review.author.username), marginRight: "15px"}}>Edit</Button>
-                    <Button color="warning" style={{marginRight: "15px"}}>Answer</Button>
-                    {review.review.author.username + " / " + review.review.lastEditDate}
+                <CardFooter style={{textAlign: "end", display: "flex", flexDirection: "row-reverse"}}>
+                    {args.review.author.username + " / " + args.review.lastEditDate}
+                    <Answer answerTo={args.review.author.username}/>
+                    <EditReview visibility = {isCurrentUserAuthor(args.review.author.username)} review = {args.review.review} reviewId = {args.review.id} refreshMovieDetails = {args.refreshMovieDetails}/>
                 </CardFooter>
             </Card>
             {
-				review.review.comments.map((comment) => (
-					<Comment comment={comment}></Comment>
+				args.review.comments.map((comment) => (
+					<Comment comment={comment} refreshMovieDetails={args.refreshMovieDetails}></Comment>
 				))
 			}
         </div>
